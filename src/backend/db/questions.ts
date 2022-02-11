@@ -1,17 +1,15 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
 import { Question } from "./db.types";
-/**
- * Questions can be added here.
- * You can add default Questions of your wish with different attributes
- * */
 
 export const questions: Array<Question> = [
   {
     _id: uuid(),
-    username: "adarshbalika",
-    questionTitle: "Why to use Server Side Rendering",
-    questionText: "I am Detailed Description about the Question.",
+    username: "user1",
+    questionTitle: "What is the best way to learn React?",
+    questionText:
+      "I have been trying to get started with React. I am not sure on the best way to learning React. I have tried a lot of tutorials and books but I still don't know how to get started with React. I am looking for someone who can help me.",
+    view: 2,
     votes: {
       upvotedBy: [],
       downvotedBy: [],
@@ -19,21 +17,22 @@ export const questions: Array<Question> = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
-        commentText: "Interesting",
+        username: "user2",
+        commentText: "Internet is a confusing place. I know this feeling!",
       },
       {
         _id: uuid(),
-        username: "dhruvishah",
-        commentText: "Wow!",
+        username: "user3",
+        commentText:
+          "Same question. Even I want to start learning React. Do we need to know JavaScript first?",
       },
     ],
     answers: [
       {
         _id: uuid(),
-        username: "dhruvishah",
+        username: "user2",
         answerText:
-          "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+          "The easiest way to get started with learning React is the official documentation",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -41,10 +40,56 @@ export const questions: Array<Question> = [
         comments: [
           {
             _id: uuid(),
-            username: "shubhamsoni",
+            username: "user5",
             commentText: "Thanks for the answer!",
           },
         ],
+      },
+    ],
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    username: "user18",
+    questionTitle: "Is typescript really difficult?",
+    questionText:
+      "I am thinking of updating my react project to support typescript. In this way I would be able to learn this new language. However, I read that it's very difficult to convert an existing project into typescript. There would be too many errors. Is this true?",
+    view: 0,
+    votes: {
+      upvotedBy: [],
+      downvotedBy: [],
+    },
+    comments: [],
+    answers: [
+      {
+        _id: uuid(),
+        username: "user12",
+        answerText:
+          "If you are a beginner, then it is not adviced to update the existing application to support typescript. If you are an experienced developer, then it is adviced to convert the existing application to typescript. You can learn more about this in the official documentation.",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        comments: [
+          {
+            _id: uuid(),
+            username: "user5",
+            commentText:
+              "I would like to disagree here. It's not difficult. We just need to understand the error descriptions and fix it accordingly. Creating a fresh new project would be even more time consuming",
+          },
+        ],
+      },
+      {
+        _id: uuid(),
+        username: "user2",
+        answerText:
+          "It's a matter of personal choice. You can decide with either of the approaches",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        comments: [],
       },
     ],
     createdAt: formatDate(),

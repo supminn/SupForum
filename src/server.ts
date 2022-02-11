@@ -52,7 +52,6 @@ export function makeServer({ environment = "development" } = {}) {
       question: Model,
     },
 
-    // Runs on the start of the server
     seeds(server) {
       server.logging = false;
       users.forEach((item) => server.create("user", { ...item } as object));

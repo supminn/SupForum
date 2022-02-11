@@ -1,9 +1,11 @@
-// @ts-nocheck
 import { Response } from "miragejs";
 // const jwt = require("jsonwebtoken");
 import dayjs from "dayjs";
 
-export const requiresAuth = function (this: any, request: any) {
+export const requiresAuth = function (
+  this: any,
+  request: any
+): { _id: string; username: string } {
   const encodedToken = request.requestHeaders.authorization;
   const decodedToken = encodedToken;
   // const decodedToken = jwt.verify(
@@ -11,13 +13,13 @@ export const requiresAuth = function (this: any, request: any) {
   //   process.env.REACT_APP_JWT_SECRET as string
   // );
   if (decodedToken) {
-    const user = this.db.users.findBy({ username: decodedToken.username });
+    const user = this.db.users.findBy({ username: decodedToken });
     if (user) {
       const { _id, username } = user;
       return { _id, username };
     }
   }
-  return new Response(
+  throw new Response(
     401,
     {},
     { errors: ["The token is invalid. Unauthorized access error."] }

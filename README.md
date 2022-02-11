@@ -1,6 +1,6 @@
 # Forum Application
 
-This application is similar to reddit or quora.
+This application is similar to reddit or quora or stack overflow.
 
 ## Technolgy Stack
 

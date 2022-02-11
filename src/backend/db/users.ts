@@ -3,36 +3,31 @@ import bcyrpt from "bcryptjs";
 import { formatDate } from "../utils/authUtils";
 import { User } from "./db.types";
 
-/**
- * User Database can be added here.
- * You can add default users of your wish with different attributes
- * */
-
 export const users: Array<User> = [
   {
     _id: uuid(),
-    firstName: "Adarsh",
-    lastName: "Balika",
-    username: "adarshbalika",
-    password: bcyrpt.hashSync("adarshBalika123"),
+    firstName: "User",
+    lastName: "Name",
+    username: "user1",
+    password: bcyrpt.hashSync("password1"),
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
-    firstName: "Dhruvi",
-    lastName: "Shah",
-    username: "dhruvishah",
-    password: bcyrpt.hashSync("dhruviShah123"),
+    firstName: "Expert",
+    lastName: "Opinion",
+    username: "experty",
+    password: bcyrpt.hashSync("that'sMyWay"),
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
-    firstName: "Shubham",
-    lastName: "Soni",
-    username: "shubhamsoni",
-    password: bcyrpt.hashSync("shubhamSoni123"),
+    firstName: "Specty",
+    lastName: "Spectator",
+    username: "binocular",
+    password: bcyrpt.hashSync("opticals11"),
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

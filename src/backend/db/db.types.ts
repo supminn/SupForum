@@ -13,6 +13,7 @@ export type Question = {
   username: string;
   questionTitle: string;
   questionText: string;
+  view: number;
   votes: {
     upvotedBy: string[];
     downvotedBy: string[];
