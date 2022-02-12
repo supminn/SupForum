@@ -4,8 +4,10 @@ import { Question } from "../../backend/db/db.types";
 import { useDataContext } from "../../reducer";
 import { MiniCard } from "./Card/MiniCard";
 import { DataActions } from "../../reducer";
+import { useNavigate } from "react-router";
 
 export const Questions = () => {
+  const navigate = useNavigate();
   const {
     state: { questions },
     dispatch,
@@ -31,7 +33,11 @@ export const Questions = () => {
   return (
     <>
       {questions.map((question: Question) => (
-        <MiniCard key={question._id} question={question} />
+        <MiniCard
+          key={question._id}
+          question={question}
+          onClick={() => navigate(`/questions/${question._id}`)}
+        />
       ))}
     </>
   );

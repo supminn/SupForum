@@ -1,3 +1,3 @@
 export const Card = ({ data }: { data: any }) => {
-  return <>Card</>;
+  return <>Card type: {data.type}</>;
 };
