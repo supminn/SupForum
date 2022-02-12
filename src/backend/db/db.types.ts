@@ -27,7 +27,7 @@ export type Question = {
 export type Comment = {
   _id: string;
   username: string;
-  commentText: string;
+  content: string;
   createdAt: string;
   updatedAt: string;
 };

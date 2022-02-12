@@ -1,6 +1,6 @@
-import { QuestionPage } from ".";
 import { Question } from "../../backend/db/db.types";
 import { useDataContext } from "../../reducer";
+import { MiniCard } from "./Card/MiniCard";
 
 export const Questions = () => {
   const {
@@ -9,7 +9,7 @@ export const Questions = () => {
   return (
     <>
       {questions.map((question: Question) => (
-        <QuestionPage key={question._id} question={question} />
+        <MiniCard key={question._id} question={question} />
       ))}
     </>
   );
