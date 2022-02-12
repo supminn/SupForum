@@ -18,14 +18,14 @@ export const questions: Array<Question> = [
       {
         _id: uuid(),
         username: "user2",
-        commentText: "Internet is a confusing place. I know this feeling!",
+        content: "Internet is a confusing place. I know this feeling!",
         createdAt: formatDate(),
         updatedAt: formatDate(),
       },
       {
         _id: uuid(),
         username: "user3",
-        commentText:
+        content:
           "Same question. Even I want to start learning React. Do we need to know JavaScript first?",
         createdAt: formatDate(),
         updatedAt: formatDate(),
@@ -45,7 +45,7 @@ export const questions: Array<Question> = [
           {
             _id: uuid(),
             username: "user5",
-            commentText: "Thanks for the answer!",
+            content: "Thanks for the answer!",
             createdAt: formatDate(),
             updatedAt: formatDate(),
           },
@@ -83,7 +83,7 @@ export const questions: Array<Question> = [
           {
             _id: uuid(),
             username: "user5",
-            commentText:
+            content:
               "I would like to disagree here. It's not difficult. We just need to understand the error descriptions and fix it accordingly. Creating a fresh new project would be even more time consuming",
             createdAt: formatDate(),
             updatedAt: formatDate(),

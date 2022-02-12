@@ -4,6 +4,7 @@ export type DataState = {
   questions: Question[];
   users: User[];
   searchValue: string;
+  loadingData: boolean;
 };
 
 export type Action = {
@@ -16,6 +17,7 @@ export type AuthState = {
   password: string;
   firstname?: string;
   lastname?: string;
+  loadingAuth: boolean;
   login?: {
     token: string;
     _id: string;

@@ -4,6 +4,7 @@ export const state: DataState = {
   questions: [],
   users: [],
   searchValue: "",
+  loadingData: false,
 };
 
 export const reducer = (state: DataState, action: Action) => {
