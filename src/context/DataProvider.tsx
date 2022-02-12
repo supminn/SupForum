@@ -3,8 +3,9 @@ import {
   state as dataState,
   reducer as dataReducer,
 } from "../reducer/dataReducer";
+import { DataContextType } from "./context.types";
 
-const DataContext = createContext({});
+const DataContext = createContext<DataContextType>({} as DataContextType);
 
 export const useDataContext = () => useContext(DataContext);
 

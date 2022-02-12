@@ -3,8 +3,9 @@ import {
   state as authState,
   reducer as authReducer,
 } from "../reducer/authReducer";
+import { AuthContextType } from "./context.types";
 
-const AuthContext = createContext({});
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const useAuthContext = () => useContext(AuthContext);
 

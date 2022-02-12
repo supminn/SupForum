@@ -16,4 +16,8 @@ export type AuthState = {
   password: string;
   firstname?: string;
   lastname?: string;
+  login?: {
+    token: string;
+    _id: string;
+  };
 };
