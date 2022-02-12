@@ -7,4 +7,6 @@ export type CardType = {
     upvotedBy: string[];
     downvotedBy: string[];
   };
+  createdAt: string;
+  updatedAt: string;
 };

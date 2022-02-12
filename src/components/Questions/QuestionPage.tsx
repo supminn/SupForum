@@ -12,12 +12,21 @@ export const QuestionPage = () => {
     state: { questions },
   } = useDataContext();
   const question = questions.find((question) => question._id === questionId)!;
-  const questionData = (({ _id, description, votes, username }: Question) => ({
+  const questionData: CardType = (({
+    _id,
+    description,
+    votes,
+    username,
+    createdAt,
+    updatedAt,
+  }: Question) => ({
     _id,
     description,
     votes,
     username,
     type: "question",
+    createdAt,
+    updatedAt,
   }))(question);
 
   const generateAnswerData = ({
@@ -25,12 +34,16 @@ export const QuestionPage = () => {
     description,
     votes,
     username,
+    createdAt,
+    updatedAt,
   }: Answer): CardType => ({
     _id,
     description,
     votes,
     username,
     type: "answer",
+    createdAt,
+    updatedAt,
   });
 
   return (
