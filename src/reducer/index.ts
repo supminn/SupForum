@@ -3,3 +3,4 @@ export {
   useAuthContext,
   AuthProvider,
 } from "./../context/AuthenticationProvider";
+export * as DataActions from "./../reducer/dataActions";

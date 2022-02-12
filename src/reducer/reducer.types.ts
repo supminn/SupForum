@@ -5,6 +5,7 @@ export type DataState = {
   users: User[];
   searchValue: string;
   loadingData: boolean;
+  error?: string;
 };
 
 export type Action = {
