@@ -6,10 +6,10 @@ export const questions: Array<Question> = [
   {
     _id: uuid(),
     username: "user1",
-    questionTitle: "What is the best way to learn React?",
-    questionText:
+    title: "What is the best way to learn React?",
+    description:
       "I have been trying to get started with React. I am not sure on the best way to learning React. I have tried a lot of tutorials and books but I still don't know how to get started with React. I am looking for someone who can help me.",
-    view: 2,
+    views: 2,
     votes: {
       upvotedBy: [],
       downvotedBy: [],
@@ -19,19 +19,23 @@ export const questions: Array<Question> = [
         _id: uuid(),
         username: "user2",
         commentText: "Internet is a confusing place. I know this feeling!",
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
       },
       {
         _id: uuid(),
         username: "user3",
         commentText:
           "Same question. Even I want to start learning React. Do we need to know JavaScript first?",
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
       },
     ],
     answers: [
       {
         _id: uuid(),
         username: "user2",
-        answerText:
+        description:
           "The easiest way to get started with learning React is the official documentation",
         votes: {
           upvotedBy: [],
@@ -42,8 +46,12 @@ export const questions: Array<Question> = [
             _id: uuid(),
             username: "user5",
             commentText: "Thanks for the answer!",
+            createdAt: formatDate(),
+            updatedAt: formatDate(),
           },
         ],
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
       },
     ],
     createdAt: formatDate(),
@@ -52,10 +60,10 @@ export const questions: Array<Question> = [
   {
     _id: uuid(),
     username: "user18",
-    questionTitle: "Is typescript really difficult?",
-    questionText:
+    title: "Is typescript really difficult?",
+    description:
       "I am thinking of updating my react project to support typescript. In this way I would be able to learn this new language. However, I read that it's very difficult to convert an existing project into typescript. There would be too many errors. Is this true?",
-    view: 0,
+    views: 0,
     votes: {
       upvotedBy: [],
       downvotedBy: [],
@@ -65,7 +73,7 @@ export const questions: Array<Question> = [
       {
         _id: uuid(),
         username: "user12",
-        answerText:
+        description:
           "If you are a beginner, then it is not adviced to update the existing application to support typescript. If you are an experienced developer, then it is adviced to convert the existing application to typescript. You can learn more about this in the official documentation.",
         votes: {
           upvotedBy: [],
@@ -77,19 +85,26 @@ export const questions: Array<Question> = [
             username: "user5",
             commentText:
               "I would like to disagree here. It's not difficult. We just need to understand the error descriptions and fix it accordingly. Creating a fresh new project would be even more time consuming",
+            createdAt: formatDate(),
+            updatedAt: formatDate(),
           },
         ],
+        bestAnswer: true,
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
       },
       {
         _id: uuid(),
         username: "user2",
-        answerText:
+        description:
           "It's a matter of personal choice. You can decide with either of the approaches",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
         },
         comments: [],
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
       },
     ],
     createdAt: formatDate(),
