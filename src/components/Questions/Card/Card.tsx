@@ -1,4 +1,5 @@
 import { DataActions, useDataContext } from "../../../reducer";
+import { updateVoteHandler } from "../../../services/apiService";
 
 export const Card = ({
   type,
@@ -20,18 +21,9 @@ export const Card = ({
       ? questions.find((question) => question._id === id)!
       : answers.find((answer) => answer._id === id)!;
 
-  const updateVotes = (vote: boolean) => {
-    // TODO: update dataReducer, call APIs
-    const dispatchType =
-      type === "question"
-        ? DataActions.UPDATE_QUESTION_VOTES
-        : DataActions.UPDATE_ANSWER_VOTES;
-    const payload = { _id: votesData._id, username, vote, type };
-    console.log("Vote payload", payload);
-    dispatch({
-      type: dispatchType,
-      payload,
-    });
+  const updateVotes = async (vote: boolean) => {
+    // TODO: replace username with loggedIn user's username
+    await updateVoteHandler(type, id, username, vote, dispatch);
   };
 
   return (

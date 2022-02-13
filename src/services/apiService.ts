@@ -124,3 +124,41 @@ export const getVotes = async (id: string, dispatch: Dispatch) => {
     });
   }
 };
+
+const loginCheck = async () => {
+  const logResponse = await axios.post("/api/auth/login", {
+    username: "user1",
+    password: "password1",
+  });
+  return logResponse.data.encodedToken;
+};
+export const updateVoteHandler = async (
+  type: "question" | "answer",
+  id: string,
+  username: string,
+  vote: boolean,
+  dispatch: Dispatch
+) => {
+  try {
+    // FIXME: Create a single endpoint for updating votes
+    /*
+    const response = await axios({
+      url: `/api/votes/${id}`,
+      method: "post",
+      data: payload,
+      headers: {
+        Authorization: token,
+      },
+    });
+    */
+    dispatch({
+      type: DataActions.UPDATE_VOTES,
+      payload: { _id: id, username, vote, type },
+    });
+  } catch (error: any) {
+    dispatch({
+      type: DataActions.SET_ERROR,
+      payload: { ...error?.response.data, from: "updateVoteHandler" },
+    });
+  }
+};
