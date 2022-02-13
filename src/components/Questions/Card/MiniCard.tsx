@@ -1,4 +1,4 @@
-import { Question } from "../../../backend/db/db.types";
+import { Question } from "../../../reducer/Data/questions";
 
 export const MiniCard = ({
   question,
@@ -7,23 +7,19 @@ export const MiniCard = ({
   question: Question;
   onClick: () => void;
 }) => {
-  const votes =
-    question.votes.upvotedBy.length + question.votes.downvotedBy.length;
-  const answers = question.answers.length;
-  const colorAnswer = question.answers.find((answer) => answer.bestAnswer);
-  const views = question.views;
+  const { votes, bestAnswer, views, answers, title, description } = question;
   return (
     <div onClick={onClick}>
       <aside>
         <p>{votes} votes</p>
-        <p style={colorAnswer ? { backgroundColor: "green" } : {}}>
+        <p style={bestAnswer ? { backgroundColor: "green" } : {}}>
           {answers} answers
         </p>
         <p>{views} views</p>
       </aside>
       <section>
-        <h3>{question.title}</h3>
-        <p>{question.description}</p>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </section>
     </div>
   );

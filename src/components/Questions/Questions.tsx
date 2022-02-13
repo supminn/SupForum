@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { Question } from "../../backend/db/db.types";
 import { useDataContext } from "../../reducer";
 import { MiniCard } from "./Card/MiniCard";
 import { DataActions } from "../../reducer";
 import { useNavigate } from "react-router";
+import { Question } from "../../reducer/Data/questions";
+import { getQuestions } from "../../services/apiService";
 
 export const Questions = () => {
   const navigate = useNavigate();
@@ -14,21 +15,8 @@ export const Questions = () => {
   } = useDataContext();
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await axios.get("/api/questions");
-        dispatch({
-          type: DataActions.SET_QUESTIONS,
-          payload: response.data.questions,
-        });
-      } catch (error: any) {
-        dispatch({
-          type: DataActions.SET_ERROR,
-          payload: error?.response.data,
-        });
-      }
-    })();
-  });
+    getQuestions(dispatch);
+  }, []);
 
   return (
     <>

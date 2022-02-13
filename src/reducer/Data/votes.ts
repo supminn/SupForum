@@ -1,3 +1,4 @@
+import { DataActions } from "..";
 import { Action } from "../reducer.types";
 
 export type VoteState = {
@@ -7,15 +8,16 @@ export type VoteState = {
   downvotedBy: string[];
 };
 
-export const voteState: VoteState = {
-  _id: "",
-  type: "question",
-  upvotedBy: [],
-  downvotedBy: [],
-};
+export const voteState: VoteState[] = [];
 
-export const voteReducer = (state: VoteState, action: Action): VoteState => {
+export const voteReducer = (
+  state: VoteState[],
+  action: Action
+): VoteState[] => {
   switch (action.type) {
+    case DataActions.SET_VOTES: {
+      return action.payload;
+    }
     default:
       return state;
   }

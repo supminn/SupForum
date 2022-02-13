@@ -11,7 +11,7 @@ export type DataState = {
   questions: Question[];
   answers: Answer[];
   users: User[];
-  votes: VoteState;
+  votes: VoteState[];
   comments: Comment[];
 };
 

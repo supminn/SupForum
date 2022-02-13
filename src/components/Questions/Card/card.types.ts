@@ -3,10 +3,10 @@ export type CardType = {
   _id: string;
   username: string;
   description: string;
-  votes: {
-    upvotedBy: string[];
-    downvotedBy: string[];
-  };
+  // votes: {
+  //   upvotedBy: string[];
+  //   downvotedBy: string[];
+  // };
   createdAt: string;
   updatedAt: string;
 };
