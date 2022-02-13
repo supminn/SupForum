@@ -1,16 +1,23 @@
-import { Question, User } from "./../backend/db/db.types";
+import { VoteState } from "./Data/votes";
+import { Comment } from "./Data/comments";
+import { User } from "./Data/users";
+import { Answer } from "./Data/answers";
+import { Question } from "./Data/questions";
 
 export type DataState = {
-  questions: Question[];
-  users: User[];
   searchValue: string;
   loadingData: boolean;
-  error?: string;
+  error: string;
+  questions: Question[];
+  answers: Answer[];
+  users: User[];
+  votes: VoteState;
+  comments: Comment[];
 };
 
 export type Action = {
   type: string;
-  payload: object;
+  payload: any; // FIXME: discrimitated union
 };
 
 export type AuthState = {

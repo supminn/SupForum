@@ -1,14 +1,6 @@
-export type User = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  username: string;
-  password: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import { Comment } from "../../reducer/Data/comments";
 
-export type Question = {
+export type QuestionDb = {
   _id: string;
   username: string;
   title: string;
@@ -19,20 +11,12 @@ export type Question = {
     downvotedBy: string[];
   };
   comments: Comment[];
-  answers: Answer[];
+  answers: AnswerDb[];
   createdAt: string;
   updatedAt: string;
 };
 
-export type Comment = {
-  _id: string;
-  username: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type Answer = {
+export type AnswerDb = {
   _id: string;
   username: string;
   description: string;

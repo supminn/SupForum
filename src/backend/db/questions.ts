@@ -1,8 +1,8 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
-import { Question } from "./db.types";
+import { QuestionDb } from "./db.types";
 
-export const questions: Array<Question> = [
+export const questions: Array<QuestionDb> = [
   {
     _id: uuid(),
     username: "user1",

@@ -1,4 +1,4 @@
-import { Comment } from "../../backend/db/db.types";
+import { Comment } from "../../reducer/Data/comments";
 
 export const Comments = ({ comments }: { comments: Comment[] }) => {
   return (
