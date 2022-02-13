@@ -26,7 +26,7 @@ export const Card = ({
       type === "question"
         ? DataActions.UPDATE_QUESTION_VOTES
         : DataActions.UPDATE_ANSWER_VOTES;
-    const payload = { _id: votesData, username, vote, type };
+    const payload = { _id: votesData._id, username, vote, type };
     console.log("Vote payload", payload);
     dispatch({
       type: dispatchType,

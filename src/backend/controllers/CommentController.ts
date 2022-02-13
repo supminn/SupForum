@@ -1,7 +1,8 @@
 import { Response } from "miragejs";
 import { formatDate, requiresAuth } from "../utils/authUtils";
 import { v4 as uuid } from "uuid";
-import { Answer, Comment } from "../db/db.types";
+import { AnswerDb } from "../db/db.types";
+import { Comment } from "../../reducer/Data/comments";
 
 /**
  * All the routes related to comments are present here.
@@ -38,7 +39,7 @@ export const getAnswerCommentsHandler = function (schema: any, request: any) {
   try {
     const question = schema.questions.findBy({ _id: questionId }).attrs;
     const { comments } = question.answers.find(
-      (answer: Answer) => answer._id === answerId
+      (answer: AnswerDb) => answer._id === answerId
     );
     return new Response(200, {}, { comments });
   } catch (error) {
@@ -242,7 +243,7 @@ export const addAnswerCommentHandler = function (
     };
     const question = schema.questions.findBy({ _id: questionId }).attrs;
     const answer = question.answers.find(
-      (answer: Answer) => answer._id === answerId
+      (answer: AnswerDb) => answer._id === answerId
     );
     answer.comments.push(comment);
     this.db.questions.update({ _id: questionId }, question);
@@ -285,7 +286,7 @@ export const editAnswerCommentHandler = function (
     const { commentData } = JSON.parse(request.requestBody);
     const question = schema.questions.findBy({ _id: questionId }).attrs;
     const answer = question.answers.find(
-      (answer: Answer) => answer._id === answerId
+      (answer: AnswerDb) => answer._id === answerId
     );
     const commentIndex = answer.comments.findIndex(
       (comment: Comment) => comment._id === commentId
@@ -341,7 +342,7 @@ export const deleteAnswerCommentHandler = function (
     const { questionId, answerId, commentId } = request.params;
     const question = schema.questions.findBy({ _id: questionId }).attrs;
     const answer = question.answers.find(
-      (answer: Answer) => answer._id === answerId
+      (answer: AnswerDb) => answer._id === answerId
     );
     const commentIndex = answer.comments.findIndex(
       (comment: Comment) => comment._id === commentId

@@ -1,7 +1,7 @@
 import { Response } from "miragejs";
 import { formatDate, requiresAuth } from "../utils/authUtils";
 import { v4 as uuid } from "uuid";
-import { Answer } from "../db/db.types";
+import { AnswerDb } from "../db/db.types";
 
 /**
  * All the routes related to answers are present here.
@@ -109,7 +109,7 @@ export const editAnswerHandler = function (
     const { answerData } = JSON.parse(request.requestBody);
     let question = schema.questions.findBy({ _id: questionId }).attrs;
     const answerIndex = question.answers.findIndex(
-      (answer: Answer) => answer._id === answerId
+      (answer: AnswerDb) => answer._id === answerId
     );
     if (question.answers[answerIndex].username !== user.username) {
       return new Response(
@@ -163,7 +163,7 @@ export const deleteAnswerHandler = function (
     }
     const question = schema.questions.findBy({ _id: questionId }).attrs;
     const answerIndex = question.answers.findIndex(
-      (answer: Answer) => answer._id === answerId
+      (answer: AnswerDb) => answer._id === answerId
     );
     if (
       question.answers[answerIndex].username !== user.username &&

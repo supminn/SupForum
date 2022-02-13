@@ -37,8 +37,8 @@ export const getQuestions = async (dispatch: Dispatch) => {
 
 export const getAnswers = async (id: string, dispatch: Dispatch) => {
   try {
-    const response = await axios.get(`/api/questions/${id}`);
-    const answers = response.data.question.answers.map((answer: AnswerDb) => ({
+    const response = await axios.get(`/api/answers/${id}`);
+    const answers = response.data.answers.map((answer: AnswerDb) => ({
       _id: answer._id,
       username: answer.username,
       description: answer.description,
@@ -62,14 +62,16 @@ export const getAnswers = async (id: string, dispatch: Dispatch) => {
 
 export const getComments = async (id: string, dispatch: Dispatch) => {
   try {
-    const response = await axios.get(`/api/questions/${id}`);
-    const data = response.data.question;
-    const questionComments = data.comments.map((comment: Comment) => ({
-      ...comment,
-      type: "question",
-    }));
-    // FIXME: API structure
-    const answerComments = data.answers.map((answer: AnswerDb) =>
+    const qResponse = await axios.get(`/api/comments/${id}`);
+    const questionComments = qResponse.data.comments.map(
+      (comment: Comment) => ({
+        ...comment,
+        type: "question",
+      })
+    );
+    // FIXME: Call the right API endpoint - /api/comments/:questionId/:answerId
+    const response = await axios.get(`/api/answers/${id}`);
+    const answerComments = response.data.answers.map((answer: AnswerDb) =>
       answer.comments.map((comment: Comment) => ({
         ...comment,
         type: "answer",
@@ -90,13 +92,25 @@ export const getComments = async (id: string, dispatch: Dispatch) => {
 
 export const getVotes = async (id: string, dispatch: Dispatch) => {
   try {
-    const response = await axios.get(`/api/questions/${id}`);
-    const data = response.data.question;
-    const questionVotes = { ...data.votes, type: "question", _id: id };
-    const answerVotes = data.answers.reduce((acc: any, answer: AnswerDb) => {
-      const answerVotes = { ...answer.votes, type: "answer", _id: answer._id };
-      return acc.concat(answerVotes);
-    }, []);
+    const qResponse = await axios.get(`/api/votes/${id}`);
+    const questionVotes = {
+      ...qResponse.data.votes,
+      type: "question",
+      _id: id,
+    };
+    //FIXME: Call the right API endpoint - /api/votes/:questionId/:answerId
+    const response = await axios.get(`/api/answers/${id}`);
+    const answerVotes = response.data.answers.reduce(
+      (acc: any, answer: AnswerDb) => {
+        const answerVotes = {
+          ...answer.votes,
+          type: "answer",
+          _id: answer._id,
+        };
+        return acc.concat(answerVotes);
+      },
+      []
+    );
 
     const votes = [questionVotes, ...answerVotes];
     dispatch({

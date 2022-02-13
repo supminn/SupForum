@@ -1,5 +1,5 @@
 import { Response } from "miragejs";
-import { Answer } from "../db/db.types";
+import { AnswerDb } from "../db/db.types";
 import { requiresAuth } from "../utils/authUtils";
 
 /**
@@ -37,7 +37,7 @@ export const getAnswerVotesHandler = function (schema: any, request: any) {
   try {
     const question = schema.questions.findBy({ _id: questionId }).attrs;
     const { votes } = question.answers.find(
-      (answer: Answer) => answer._id === answerId
+      (answer: AnswerDb) => answer._id === answerId
     );
     return new Response(200, {}, { votes });
   } catch (error) {
@@ -154,7 +154,7 @@ export const voteAnswerHandler = function (
     }
     const question = schema.questions.findBy({ _id: questionId }).attrs;
     const answer = question.answers.find(
-      (answer: Answer) => answer._id === answerId
+      (answer: AnswerDb) => answer._id === answerId
     );
     const vote = JSON.parse(request.requestBody);
     switch (vote.reaction) {
