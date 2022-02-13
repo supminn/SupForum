@@ -24,18 +24,22 @@ export const voteReducer = (
         (vote: VoteState) =>
           vote._id === action.payload._id && vote.type === action.payload.type
       )!;
-      let upvotedBy: string[] = [],
-        downvotedBy: string[] = [];
+      let upvotedBy: string[] = [...voteData.upvotedBy],
+        downvotedBy: string[] = [...voteData.downvotedBy];
       if (action.payload.vote) {
         downvotedBy = voteData?.downvotedBy.filter(
           (data: string) => data !== action.payload.username
         );
-        upvotedBy = voteData.upvotedBy.concat(action.payload.username);
+        if (!upvotedBy.includes(action.payload.username)) {
+          upvotedBy = voteData.upvotedBy.concat(action.payload.username);
+        }
       } else {
         upvotedBy = voteData?.upvotedBy.filter(
           (data: string) => data !== action.payload.username
         );
-        downvotedBy = voteData.downvotedBy.concat(action.payload.username);
+        if (!downvotedBy.includes(action.payload.username)) {
+          downvotedBy = voteData.downvotedBy.concat(action.payload.username);
+        }
       }
       return state.map((vote: VoteState) =>
         vote._id === voteData._id ? { ...vote, upvotedBy, downvotedBy } : vote
