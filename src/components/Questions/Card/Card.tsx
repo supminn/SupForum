@@ -1,4 +1,4 @@
-import { DataActions, useDataContext } from "../../../reducer";
+import { useDataContext } from "../../../reducer";
 import { updateVoteHandler } from "../../../services/apiService";
 
 export const Card = ({

@@ -35,15 +35,15 @@ export const getQuestions = async (dispatch: Dispatch) => {
   }
 };
 
-export const getAnswers = async (id: string, dispatch: Dispatch) => {
+export const getAnswers = async (questionId: string, dispatch: Dispatch) => {
   try {
-    const response = await axios.get(`/api/answers/${id}`);
+    const response = await axios.get(`/api/answers/${questionId}`);
     const answers = response.data.answers.map((answer: AnswerDb) => ({
       _id: answer._id,
       username: answer.username,
       description: answer.description,
       votes: answer.votes.upvotedBy.length - answer.votes.downvotedBy.length,
-      questionId: id,
+      questionId,
       createdAt: answer.createdAt,
       updatedAt: answer.updatedAt,
     }));
@@ -60,67 +60,48 @@ export const getAnswers = async (id: string, dispatch: Dispatch) => {
   }
 };
 
-export const getComments = async (id: string, dispatch: Dispatch) => {
+export const getQuestionComments = async (
+  questionId: string,
+  dispatch: Dispatch
+) => {
   try {
-    const qResponse = await axios.get(`/api/comments/${id}`);
-    const questionComments = qResponse.data.comments.map(
-      (comment: Comment) => ({
-        ...comment,
-        type: "question",
-      })
-    );
-    // FIXME: Call the right API endpoint - /api/comments/:questionId/:answerId
-    const response = await axios.get(`/api/answers/${id}`);
-    const answerComments = response.data.answers.map((answer: AnswerDb) =>
-      answer.comments.map((comment: Comment) => ({
-        ...comment,
-        type: "answer",
-      }))
-    );
-    const comments = [...questionComments, ...answerComments];
+    const response = await axios.get(`/api/comments/${questionId}`);
+    const comments = response.data.comments.map((comment: Comment) => ({
+      ...comment,
+      type: "question",
+      refId: questionId,
+    }));
     dispatch({
-      type: DataActions.SET_COMMENTS,
+      type: DataActions.SET_QUESTION_COMMENTS,
       payload: comments,
     });
   } catch (error: any) {
     dispatch({
       type: DataActions.SET_ERROR,
-      payload: { ...error?.response.data, from: "getComments" },
+      payload: { ...error?.response.data, from: "getQuestionComments" },
     });
   }
 };
 
-export const getVotes = async (id: string, dispatch: Dispatch) => {
+export const getQuestionVotes = async (
+  questionId: string,
+  dispatch: Dispatch
+) => {
   try {
-    const qResponse = await axios.get(`/api/votes/${id}`);
-    const questionVotes = {
-      ...qResponse.data.votes,
+    const response = await axios.get(`/api/votes/${questionId}`);
+    const votes = {
+      ...response.data.votes,
       type: "question",
-      _id: id,
+      _id: questionId,
     };
-    //FIXME: Call the right API endpoint - /api/votes/:questionId/:answerId
-    const response = await axios.get(`/api/answers/${id}`);
-    const answerVotes = response.data.answers.reduce(
-      (acc: any, answer: AnswerDb) => {
-        const answerVotes = {
-          ...answer.votes,
-          type: "answer",
-          _id: answer._id,
-        };
-        return acc.concat(answerVotes);
-      },
-      []
-    );
-
-    const votes = [questionVotes, ...answerVotes];
     dispatch({
-      type: DataActions.SET_VOTES,
+      type: DataActions.SET_QUESTION_VOTES,
       payload: votes,
     });
   } catch (error: any) {
     dispatch({
       type: DataActions.SET_ERROR,
-      payload: { ...error?.response.data, from: "getVotes" },
+      payload: { ...error?.response.data, from: "getQuestionVotes" },
     });
   }
 };

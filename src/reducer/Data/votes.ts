@@ -15,8 +15,8 @@ export const voteReducer = (
   action: Action
 ): VoteState[] => {
   switch (action.type) {
-    case DataActions.SET_VOTES: {
-      return action.payload;
+    case DataActions.SET_QUESTION_VOTES: {
+      return [action.payload];
     }
     case DataActions.UPDATE_VOTES: {
       // FIXME: based on API response

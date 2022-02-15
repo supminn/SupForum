@@ -1,14 +1,23 @@
 import { useDataContext } from "../../reducer";
 import { Comment } from "../../reducer/Data/comments";
 
-export const Comments = ({ type }: { type: "question" | "answer" }) => {
+export const Comments = ({
+  type,
+  id,
+}: {
+  type: "question" | "answer";
+  id: string;
+}) => {
   const {
     state: { comments },
   } = useDataContext();
-  const data = comments.filter((comment) => comment.type === type);
+  const data = comments.filter(
+    (comment) => comment.type === type && comment.refId === id
+  );
+
   return (
     <>
-      <h3>Comments</h3>
+      <h4>Comment</h4>
       {data.map((comment: Comment) => (
         <p key={comment._id}>{comment.content}</p>
       ))}
