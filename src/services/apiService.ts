@@ -83,6 +83,36 @@ export const getQuestionComments = async (
   }
 };
 
+export const getAnswerComments = async (
+  questionId: string,
+  answerIds: string[],
+  dispatch: Dispatch
+) => {
+  try {
+    const comments = await Promise.all(
+      answerIds.map(async (answerId: string) => {
+        const response = await axios.get(
+          `/api/comments/${questionId}/${answerId}`
+        );
+        return response.data.comments.map((comment: Comment) => ({
+          ...comment,
+          type: "answer",
+          refId: answerId,
+        }));
+      })
+    );
+    dispatch({
+      type: DataActions.SET_ANSWER_COMMENTS,
+      payload: comments.flat(),
+    });
+  } catch (error: any) {
+    dispatch({
+      type: DataActions.SET_ERROR,
+      payload: { ...error?.response.data, from: "getAnswerComments" },
+    });
+  }
+};
+
 export const getQuestionVotes = async (
   questionId: string,
   dispatch: Dispatch
@@ -102,6 +132,37 @@ export const getQuestionVotes = async (
     dispatch({
       type: DataActions.SET_ERROR,
       payload: { ...error?.response.data, from: "getQuestionVotes" },
+    });
+  }
+};
+
+export const getAnswerVotes = async (
+  questionId: string,
+  answerIds: string[],
+  dispatch: Dispatch
+) => {
+  try {
+    const votes = await Promise.all(
+      answerIds.map(async (answerId: string) => {
+        const response = await axios.get(
+          `/api/votes/${questionId}/${answerId}`
+        );
+        return {
+          ...response.data.votes,
+          type: "answer",
+          _id: answerId,
+        };
+      })
+    );
+    dispatch({
+      type: DataActions.SET_ANSWER_VOTES,
+      payload: votes,
+    });
+  } catch (error: any) {
+    console.log("error", error);
+    dispatch({
+      type: DataActions.SET_ERROR,
+      payload: { ...error?.response.data, from: "getAnswerVotes" },
     });
   }
 };
@@ -143,3 +204,92 @@ export const updateVoteHandler = async (
     });
   }
 };
+
+/*
+
+const {
+  state: { comments, votes },
+  dispatch,
+} = useDataContext();
+useEffect(() => {
+  getAnswerComments(
+    { questionId: answer.questionId, answerId: answer._id },
+    dispatch
+  );
+  getAnswerVotes(
+    { questionId: answer.questionId, answerId: answer._id },
+    dispatch
+  );
+}, []);
+
+export const getAnswerVotes = async (
+  { questionId, answerId }: { questionId: string; answerId?: string },
+  dispatch: Dispatch
+) => {
+  try {
+    const response = await axios.get(`/api/votes/${questionId}/${answerId}`);
+    const votes = {
+      ...response.data.votes,
+      type: "answer",
+      _id: answerId,
+    };
+    dispatch({
+      type: DataActions.SET_ANSWER_VOTES,
+      payload: votes,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: DataActions.SET_ERROR,
+      payload: { ...error?.response.data, from: "getAnswerVotes" },
+    });
+  }
+};
+
+export const getAnswerComments = async (
+  { questionId, answerId }: { questionId: string; answerId?: string },
+  dispatch: Dispatch
+) => {
+  try {
+    const response = await axios.get(`/api/comments/${questionId}/${answerId}`);
+    const comments = response.data.comments.map((comment: Comment) => ({
+      ...comment,
+      type: "answer",
+      refId: answerId,
+    }));
+    comments.forEach((comment: Comment) => {
+      dispatch({
+        type: DataActions.SET_ANSWER_COMMENTS,
+        payload: comment,
+      });
+    });
+  } catch (error: any) {
+    dispatch({
+      type: DataActions.SET_ERROR,
+      payload: { ...error?.response.data, from: "getAnswerComments" },
+    });
+  }
+};export const getAnswerComments = async (
+  { questionId, answerId }: { questionId: string; answerId?: string },
+  dispatch: Dispatch
+) => {
+  try {
+    const response = await axios.get(`/api/comments/${questionId}/${answerId}`);
+    const comments = response.data.comments.map((comment: Comment) => ({
+      ...comment,
+      type: "answer",
+      refId: answerId,
+    }));
+    comments.forEach((comment: Comment) => {
+      dispatch({
+        type: DataActions.SET_ANSWER_COMMENTS,
+        payload: comment,
+      });
+    });
+  } catch (error: any) {
+    dispatch({
+      type: DataActions.SET_ERROR,
+      payload: { ...error?.response.data, from: "getAnswerComments" },
+    });
+  }
+};
+*/

@@ -18,6 +18,11 @@ export const voteReducer = (
     case DataActions.SET_QUESTION_VOTES: {
       return [action.payload];
     }
+    case DataActions.SET_ANSWER_VOTES: {
+      return state
+        .filter((vote: VoteState) => vote.type === "question")
+        .concat(action.payload);
+    }
     case DataActions.UPDATE_VOTES: {
       // FIXME: based on API response
       const voteData = state.find(

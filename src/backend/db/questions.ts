@@ -88,6 +88,13 @@ export const questions: Array<QuestionDb> = [
             createdAt: formatDate(),
             updatedAt: formatDate(),
           },
+          {
+            _id: uuid(),
+            username: "user1",
+            content: "Thanks for the answer. Comment#2",
+            createdAt: formatDate(),
+            updatedAt: formatDate(),
+          },
         ],
         bestAnswer: true,
         createdAt: formatDate(),
