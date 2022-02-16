@@ -29,3 +29,13 @@ export type AnswerDb = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type UserDb = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  createdAt: string;
+  updatedAt: string;
+};

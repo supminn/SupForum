@@ -1,9 +1,9 @@
 import { v4 as uuid } from "uuid";
 import bcyrpt from "bcryptjs";
 import { formatDate } from "../utils/authUtils";
-import { User } from "../../reducer/Data/users";
+import { UserDb } from "./db.types";
 
-export const users: Array<User> = [
+export const users: Array<UserDb> = [
   {
     _id: uuid(),
     firstName: "User",
