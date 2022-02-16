@@ -10,7 +10,7 @@ import { requiresAuth } from "../utils/authUtils";
  * send GET Request at /api/users
  * */
 
-export const getAllUsersHandler = function (this: any) {
+export const getUsersHandler = function (this: any) {
   return new Response(200, {}, { users: this.db.users });
 };
 

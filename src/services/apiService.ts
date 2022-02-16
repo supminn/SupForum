@@ -7,6 +7,29 @@ import { Action } from "../reducer/reducer.types";
 
 type Dispatch = (action: Action) => void;
 
+export const getUsers = async (dispatch: Dispatch) => {
+  try {
+    const response = await axios.get("/api/users");
+    dispatch({ type: DataActions.SET_USERS, payload: response.data.users });
+  } catch (error: any) {
+    dispatch({
+      type: DataActions.SET_ERROR,
+      payload: { ...error?.response.data, from: "getUsers" },
+    });
+  }
+};
+
+export const getUserData = async (userId: string, dispatch: Dispatch) => {
+  try {
+    const response = await axios.get(`/api/users/${userId}`);
+    console.log("Individual user data", response.data.user);
+  } catch (error: any) {
+    dispatch({
+      type: DataActions.SET_ERROR,
+      payload: { ...error?.response.data, from: "getUserData" },
+    });
+  }
+};
 export const getQuestions = async (dispatch: Dispatch) => {
   try {
     const response = await axios.get("/api/questions");
@@ -159,7 +182,6 @@ export const getAnswerVotes = async (
       payload: votes,
     });
   } catch (error: any) {
-    console.log("error", error);
     dispatch({
       type: DataActions.SET_ERROR,
       payload: { ...error?.response.data, from: "getAnswerVotes" },
@@ -167,13 +189,6 @@ export const getAnswerVotes = async (
   }
 };
 
-const loginCheck = async () => {
-  const logResponse = await axios.post("/api/auth/login", {
-    username: "user1",
-    password: "password1",
-  });
-  return logResponse.data.encodedToken;
-};
 export const updateVoteHandler = async (
   type: "question" | "answer",
   id: string,
