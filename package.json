@@ -8,9 +8,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.8.3",
+    "@emotion/react": "11",
+    "@emotion/styled": "11",
     "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "dayjs": "^1.10.7",
+    "framer-motion": "6",
     "history": "^5.2.0",
     "jsonwebtoken": "^8.5.1",
     "miragejs": "^0.1.43",

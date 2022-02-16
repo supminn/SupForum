@@ -1,4 +1,5 @@
 import { Question } from "../../../reducer/Data/questions";
+import { Heading, Text } from "@chakra-ui/react";
 
 export const MiniCard = ({
   question,
@@ -12,14 +13,12 @@ export const MiniCard = ({
     <div onClick={onClick}>
       <aside>
         <p>{votes} votes</p>
-        <p style={bestAnswer ? { backgroundColor: "green" } : {}}>
-          {answers} answers
-        </p>
+        <Text bg={bestAnswer && "green.600"}>{answers} answers</Text>
         <p>{views} views</p>
       </aside>
       <section>
-        <h3>{title}</h3>
-        <p>{description}</p>
+        <Heading size="md">{title}</Heading>
+        <Text isTruncated>{description}</Text>
       </section>
     </div>
   );
