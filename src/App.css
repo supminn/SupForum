@@ -1,6 +1,10 @@
 :root{
-  --white: #fff;
-  --black: #000;
+  --white: #fdfdfd;
+  --black: #090909;
+  --bgPrimary: #f4fafa;
+  --primary: #006e6f;
+  --bgSecondary: #f5f2ec;
+  --secondary: #fa894e;
 }
 
 main{
