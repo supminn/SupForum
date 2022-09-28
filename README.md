@@ -10,3 +10,7 @@ This application is similar to reddit or quora or stack overflow.
 ### Todo
 
 - Add tags to each question. Search using tags
+
+https://dribbble.com/shots/17538321-Finance-Website-Design
+https://dribbble.com/search/forum-application
+https://chakra-ui.com/docs/media-and-icons/icon
